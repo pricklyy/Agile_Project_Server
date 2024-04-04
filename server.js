@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const UserRoutes = require('./router/UserRoutes');
 const RestaurantRoutes = require('./router/RestaurantRoutes');
-
+const ReservationRoutes = require('./router/ResersationRoutes');
 
 
 const app = express();
@@ -17,8 +17,9 @@ mongoose.connect('mongodb://localhost:27017/agile',{useNewUrlParser: true }).the
     console.log(`Connect failed ${err}`);
 })
 
-app.use("/Api",UserRoutes);
-app.use("/Api",RestaurantRoutes);
+app.use("/api",UserRoutes);
+app.use("/api",RestaurantRoutes);
+app.use("/api",ReservationRoutes);
 app.listen(port,() => {
     console.log(`Server is running`)
 })

@@ -4,18 +4,18 @@ const jwt = require("jsonwebtoken")
 
 const login = async(req,res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
     
         // Tìm người dùng theo tên người dùng
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user) {
-          return res.status(401).json({ error: 'Invalid username or password' });
+          return res.status(401).json({ error: 'Invalid email or password' });
         }
     
         // So sánh mật khẩu
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-          return res.status(401).json({ error: 'Invalid username or password' });
+          return res.status(401).json({ error: 'Invalid email or password' });
         }
     
         // Tạo token xác thực

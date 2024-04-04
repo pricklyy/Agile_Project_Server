@@ -8,6 +8,15 @@ const getAllUser = async (req,res) => {
         console.log(error);
     }
 }
+const getUserById = async(req,res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) throw Error('User not found');
+        res.json(user);
+      } catch (err) {
+        res.status(404).json({ error: err.message });
+      }
+}
 
 const deleteUser = async(req,res) => {
     try {
@@ -40,4 +49,4 @@ const updateUser = async(req,res) => {
     }
 }
 
-module.exports = {getAllUser,deleteUser,updateUser};
+module.exports = {getAllUser,deleteUser,updateUser,getUserById};

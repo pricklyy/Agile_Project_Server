@@ -48,5 +48,14 @@ const updateRestaurant = async(req,res) => {
         res.status(500).json({ error: 'Internal server error' });
       }
 }
+const searchRestaurant = async(req,res) => {
+  try {
+    const { name } = req.query;
+    const restaurants = await Restaurant.find({ name: new RegExp(name, 'i') });
+    res.json(restaurants);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
-module.exports = {getAllRestaurant,getOneRestaurant,createRestaurant,deleteRestaurant,updateRestaurant}
+module.exports = {getAllRestaurant,getOneRestaurant,createRestaurant,deleteRestaurant,updateRestaurant,searchRestaurant}
